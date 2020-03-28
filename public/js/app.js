@@ -1921,7 +1921,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'myheader',
+  methods: {
+    logout: function logout() {
+      this.$store.commit('logout');
+      this.$router.push({
+        path: '/login'
+      });
+    }
+  },
+  computed: {
+    currentUser: function currentUser() {
+      return this.$store.getters.getCurrentUser;
+    }
+  }
+});
 
 /***/ }),
 
@@ -2026,6 +2059,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'login',
@@ -2052,6 +2088,11 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         _this.$store.commit("loginFailed", error);
       });
+    }
+  },
+  computed: {
+    authError: function authError() {
+      return this.$store.getters.authError;
     }
   }
 });
@@ -6601,7 +6642,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#login .container #login-row #login-column #login-box[data-v-4221c3ad] {\nmargin-top: 120px;\nmax-width: 600px;\nheight: 320px;\nborder: 1px solid #9c9c9c;\nbackground-color: #eaeaea;\n}\n#login .container #login-row #login-column #login-box #login-form[data-v-4221c3ad] {\npadding: 20px;\n}\n#login\n.container\n#login-row\n#login-column\n#login-box\n#login-form\n#register-link[data-v-4221c3ad] {\nmargin-top: -85px;\n}\n", ""]);
+exports.push([module.i, "\n#login .container #login-row #login-column #login-box[data-v-4221c3ad] {\nmargin-top: 120px;\nmax-width: 600px;\nheight: 320px;\nborder: 1px solid #9c9c9c;\nbackground-color: #eaeaea;\n}\n#login .container #login-row #login-column #login-box #login-form[data-v-4221c3ad] {\n  padding: 20px;\n}\n#login\n.container\n#login-row\n#login-column\n#login-box\n#login-form\n#register-link[data-v-4221c3ad] {\n  margin-top: -85px;\n}\n.error[data-v-4221c3ad]{\n  text-align: center;\n  color: red;\n}\n", ""]);
 
 // exports
 
@@ -38073,30 +38114,114 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "nav",
+      { staticClass: "navbar navbar-expand-lg navbar-light bg-light" },
+      [
+        _c("a", { staticClass: "navbar-brand" }, [_vm._v("Navbar")]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "navbar-nav ml-auto" },
+          [
+            !_vm.currentUser
+              ? [
+                  _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        { staticClass: "nav-link", attrs: { to: "/login" } },
+                        [_vm._v("Login")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        { staticClass: "nav-link", attrs: { to: "/register" } },
+                        [_vm._v("Register")]
+                      )
+                    ],
+                    1
+                  )
+                ]
+              : [
+                  _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/customers" }
+                        },
+                        [_vm._v("Customers")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "nav-item dropdown" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link dropdown-toggle",
+                        attrs: {
+                          href: "#",
+                          id: "navbarDropdown",
+                          "data-toggle": "dropdown",
+                          role: "button",
+                          "aria-expanded": "false",
+                          "aria-haspopup": "true"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n            " + _vm._s(_vm.currentUser.name) + " "
+                        ),
+                        _c("span", { staticClass: "caret" })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "dropdown-menu",
+                        attrs: { "aria-labelledby": "navbarDropdown" }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { href: "#!" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.logout($event)
+                              }
+                            }
+                          },
+                          [_vm._v("Logout")]
+                        )
+                      ]
+                    )
+                  ])
+                ]
+          ],
+          2
+        )
+      ]
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c(
-        "nav",
-        { staticClass: "navbar navbar-light bg-light justify-content-between" },
-        [
-          _c("a", { staticClass: "navbar-brand" }, [_vm._v("Navbar")]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "navbar-nav" }, [
-            _c("li", { staticClass: "nav-item active" }, [
-              _c("a", { attrs: { href: "/login" } }, [_vm._v("Login")])
-            ])
-          ])
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38222,7 +38347,12 @@ var render = function() {
                     {
                       staticClass: "form",
                       attrs: { id: "login-form", action: "", method: "post" },
-                      on: { submit: _vm.authenticate }
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.authenticate($event)
+                        }
+                      }
                     },
                     [
                       _c("h3", { staticClass: "text-center text-info" }, [
@@ -38304,7 +38434,17 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _vm._m(0)
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _vm.authError
+                        ? _c("div", { staticClass: "error" }, [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(_vm.authError) +
+                                "\n            "
+                            )
+                          ])
+                        : _vm._e()
                     ]
                   )
                 ]
@@ -54510,12 +54650,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 /* harmony import */ var _components_MainApp_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/MainApp.vue */ "./resources/js/components/MainApp.vue");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
+/* harmony import */ var _helpers_general__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helpers/general */ "./resources/js/helpers/general.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
 
 
 
@@ -54530,20 +54672,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history'
 });
 var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store(_store__WEBPACK_IMPORTED_MODULE_5__["default"]);
-router.beforeEach(function (to, from, next) {
-  var requiresAuth = to.matched.some(function (record) {
-    return record.meta.requiresAuth;
-  });
-  var currentUser = store.state.currentUser;
-
-  if (requiresAuth && !currentUser) {
-    next('login');
-  } else if (to.path == '/login' && currentUser) {
-    next('/');
-  } else {
-    next();
-  }
-});
+Object(_helpers_general__WEBPACK_IMPORTED_MODULE_6__["initialize"])(router, store);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   router: router,
@@ -54905,6 +55034,43 @@ function getLocalUser() {
 
 /***/ }),
 
+/***/ "./resources/js/helpers/general.js":
+/*!*****************************************!*\
+  !*** ./resources/js/helpers/general.js ***!
+  \*****************************************/
+/*! exports provided: initialize */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialize", function() { return initialize; });
+function initialize(router, store) {
+  router.beforeEach(function (to, from, next) {
+    var requiresAuth = to.matched.some(function (record) {
+      return record.meta.requiresAuth;
+    });
+    var currentUser = store.state.currentUser;
+
+    if (requiresAuth && !currentUser) {
+      next('login');
+    } else if (to.path == '/login' && currentUser) {
+      next('/');
+    } else {
+      next();
+    }
+  });
+  axios.interceptors.response.use(null, function (error) {
+    if (error.response.status == 401) {
+      store.commit('logout');
+      router.push({
+        path: '/login'
+      });
+    }
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/routes.js":
 /*!********************************!*\
   !*** ./resources/js/routes.js ***!
@@ -54965,8 +55131,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
       });
       localStorage.setItem("user", JSON.stringify(state.currentUser));
     },
-    loginFailed: function loginFailed(state, payload) {
-      state.auth_error = payload.error;
+    loginFailed: function loginFailed(state, error) {
+      state.auth_error = error;
       state.loading = false;
     },
     logout: function logout(state) {

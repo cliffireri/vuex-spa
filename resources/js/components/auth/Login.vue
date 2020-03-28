@@ -5,7 +5,7 @@
       <div id="login-row" class="row justify-content-center align-items-center">
         <div id="login-column" class="col-md-6">
           <div id="login-box" class="col-md-12">
-            <form @submit="authenticate" id="login-form" class="form" action method="post">
+            <form @submit.prevent="authenticate" id="login-form" class="form" action method="post">
               <h3 class="text-center text-info">Login</h3>
               <div class="form-group">
                 <label for="email" class="text-info">Email:</label>
@@ -21,6 +21,9 @@
                   <button class="btn btn-primary btn-block">
                       Submit
                   </button>
+              </div>
+               <div class="error" v-if="authError">
+                  {{ authError }}
               </div>
             </form>
           </div>
@@ -55,6 +58,11 @@ export default {
                 this.$store.commit("loginFailed", error);
             })
         }
+    },
+    computed: {
+      authError(){
+        return this.$store.getters.authError;
+      }
     }
 };
 </script>
@@ -68,7 +76,7 @@ export default {
     background-color: #eaeaea;
     }
     #login .container #login-row #login-column #login-box #login-form {
-    padding: 20px;
+      padding: 20px;
     }
     #login
     .container
@@ -77,6 +85,11 @@ export default {
     #login-box
     #login-form
     #register-link {
-    margin-top: -85px;
+      margin-top: -85px;
+    }
+
+    .error{
+      text-align: center;
+      color: red;
     }
 </style>

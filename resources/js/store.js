@@ -21,8 +21,8 @@ export default {
             state.currentUser = Object.assign({}, payload.user, {token:payload.access_token});
             localStorage.setItem("user", JSON.stringify(state.currentUser));
         },
-        loginFailed(state, payload){
-            state.auth_error = payload.error;
+        loginFailed(state, error){
+            state.auth_error = error;
             state.loading = false;
         },
         logout(state){
