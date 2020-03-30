@@ -1,4 +1,5 @@
 import { getLocalUser } from "./helpers/auth";
+import Axios from "axios";
 
 const user = getLocalUser();
 
@@ -29,6 +30,9 @@ export default {
             localStorage.removeItem("user");
             state.isLoggedIn = false;
             state.currentUser = null;
+        },
+        updateCustomers(state, customers){
+            state.customers = customers;
         }
     },
     getters: {
@@ -46,11 +50,22 @@ export default {
         },
         customers(state){
             return state.customers;
-        }
+        },
     },
     actions: {
         login(context){
             context.commit("login");
+        },
+        getCustomers(context){
+            axios.get('/api/customers', {
+                headers: {
+                    'Authorization': `Bearer ${context.state.currentUser.token}`
+                }
+            }).then((response) => {
+                context.commit('updateCustomers', response.data.customers);
+            }).catch((error) => {
+                console.log(error);
+            })
         }
     },
 }
