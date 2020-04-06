@@ -28,14 +28,14 @@ export const routes = [
                 path: '/',
                 component: List
             },
-            // {
-            //     path: '/new',
-            //     component: NewCustomer
-            // },
-            // {
-            //     path: ':id',
-            //     component: Customer
-            // }
+            {
+                path: '/new',
+                component: New
+            },
+            {
+                path: ':id',
+                component: View
+            }
         ]
     }
 ]; 

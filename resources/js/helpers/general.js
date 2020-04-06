@@ -17,5 +17,7 @@ export function initialize(router, store){
             store.commit('logout');
             router.push({path: '/login'})
         }
+
+        return Promise.reject(error);
     })
 }

@@ -27,10 +27,10 @@ class CustomersController extends Controller
 
     public function get($id)
     {
-        $customer = Customer::find($id);
+        $customer = Customer::find($id);;
 
         return response()->json([
-            'customers' => $customer
+            'customer' => $customer
         ], 200);
     }
 }
