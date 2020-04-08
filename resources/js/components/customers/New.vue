@@ -82,11 +82,7 @@ export default {
                 return;
             }
 
-            axios.post('/api/customers/new', this.$data.customer,{
-                headers: {
-                    "Authorization": `Bearer ${this.getUser.token}`
-                }
-            }).then(response => {
+            axios.post('/api/customers/new', this.$data.customer).then(response => {
                 console.log(response.data.customer);
                 this.$router.push('/customers');
             }).catch(error => {

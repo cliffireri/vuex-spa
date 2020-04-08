@@ -34,6 +34,9 @@
 <script>
 export default {
   mounted() {
+    if(this.customers.length){
+      return;
+    }
     this.$store.dispatch("getCustomers");
   },
   computed: {

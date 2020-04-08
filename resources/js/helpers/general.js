@@ -20,4 +20,5 @@ export function initialize(router, store){
 
         return Promise.reject(error);
     })
+    axios.defaults.headers.common["Authorization"] = `Bearer ${store.getters.getCurrentUser.token}`;
 }

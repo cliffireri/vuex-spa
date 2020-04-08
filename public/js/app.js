@@ -2143,6 +2143,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
+    if (this.customers.length) {
+      return;
+    }
+
     this.$store.dispatch("getCustomers");
   },
   computed: {
@@ -2278,11 +2282,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post('/api/customers/new', this.$data.customer, {
-        headers: {
-          "Authorization": "Bearer ".concat(this.getUser.token)
-        }
-      }).then(function (response) {
+      axios.post('/api/customers/new', this.$data.customer).then(function (response) {
         console.log(response.data.customer);
 
         _this.$router.push('/customers');
@@ -2373,20 +2373,25 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     getUser: function getUser() {
       return this.$store.getters.getCurrentUser;
+    },
+    customers: function customers() {
+      return this.$store.getters.customers;
     }
   },
   created: function created() {
     var _this = this;
 
-    axios.get("/api/customers/".concat(this.$route.params.id), {
-      headers: {
-        "Authorization": "Bearer ".concat(this.getUser.token)
-      }
-    }).then(function (response) {
-      _this.customer = response.data.customer;
-    })["catch"](function (error) {
-      console.log(error);
-    });
+    if (this.customers.length) {
+      this.customer = this.customers.find(function (customer) {
+        return customer.id == _this.$route.params.id;
+      });
+    } else {
+      axios.get("/api/customers/".concat(this.$route.params.id)).then(function (response) {
+        _this.customer = response.data.customer;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   }
 });
 
@@ -57538,6 +57543,7 @@ function initialize(router, store) {
 
     return Promise.reject(error);
   });
+  axios.defaults.headers.common["Authorization"] = "Bearer ".concat(store.getters.getCurrentUser.token);
 }
 
 /***/ }),
@@ -57664,11 +57670,7 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
       context.commit("login");
     },
     getCustomers: function getCustomers(context) {
-      axios.get('/api/customers', {
-        headers: {
-          'Authorization': "Bearer ".concat(context.state.currentUser.token)
-        }
-      }).then(function (response) {
+      axios.get('/api/customers').then(function (response) {
         context.commit('updateCustomers', response.data.customers);
       })["catch"](function (error) {
         console.log(error);

@@ -41,18 +41,21 @@ export default {
     computed: {
         getUser(){
             return this.$store.getters.getCurrentUser;
+        },
+        customers(){
+            return this.$store.getters.customers;
         }
     },
     created(){
-        axios.get(`/api/customers/${this.$route.params.id}`,{
-             headers: {
-                "Authorization": `Bearer ${this.getUser.token}`
-            }
-        }).then(response => {
-            this.customer = response.data.customer;
-        }).catch(error => {
-            console.log(error);
-        })
+        if(this.customers.length){
+            this.customer = this.customers.find(customer => customer.id == this.$route.params.id);
+        }else{
+            axios.get(`/api/customers/${this.$route.params.id}`).then(response => {
+                this.customer = response.data.customer;
+            }).catch(error => {
+                console.log(error);
+            })
+        }
     }
 }
 </script>

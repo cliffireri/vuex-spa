@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Http\Requests\CreateCustomerRequest;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
@@ -16,7 +17,7 @@ class CustomersController extends Controller
         ], 200);
     }
 
-    public function new(Request $request)
+    public function new(CreateCustomerRequest $request)
     {
         $customer = Customer::create($request->only(['name','email','phone','website']));
 
